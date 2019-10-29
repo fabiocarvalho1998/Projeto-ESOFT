@@ -15,10 +15,15 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+/**
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "Aluno")
+    private Set<Explicacao> explicacoes=new HashSet<>();
 
-    //@EqualsAndHashCode.Exclude
-    //@JsonIgnore
-    //@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "Aluno")
-    //private Set<Explicacao> explicacoes=new HashSet<>();
-
+    public void addExplicacao(Explicacao explicacao) {
+        this.getExplicacoes().add(explicacao);
+        explicacao.setAluno(this);
+    }
+**/
 }
