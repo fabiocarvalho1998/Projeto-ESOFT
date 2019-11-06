@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
-//@Entity
-public class Disponibilidade {/*
+@Entity
+public class Disponibilidade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    /*
     @ManyToOne(fetch = FetchType.LAZY)
     private Explicador explicador;*/
 }

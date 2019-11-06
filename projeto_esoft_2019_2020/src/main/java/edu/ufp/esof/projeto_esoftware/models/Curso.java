@@ -10,9 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Curso {/*
+@Entity
+public class Curso {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
+
+    /*
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Cadeira> cadeiras = new HashSet<>();

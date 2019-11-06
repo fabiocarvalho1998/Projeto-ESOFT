@@ -2,18 +2,20 @@ package edu.ufp.esof.projeto_esoftware.models;
 
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Explicador {/*
+@Entity
+public class Explicador {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
 
+
+    /*
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Idioma> idiomas = new HashSet<>();
 
