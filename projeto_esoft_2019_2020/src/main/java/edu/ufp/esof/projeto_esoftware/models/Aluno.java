@@ -3,6 +3,7 @@ package edu.ufp.esof.projeto_esoftware.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,16 +15,18 @@ public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
-/**
+
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "Aluno")
+    @ToString.Exclude
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "aluno")
     private Set<Explicacao> explicacoes=new HashSet<>();
 
     public void addExplicacao(Explicacao explicacao) {
-        this.getExplicacoes().add(explicacao);
+        this.explicacoes.add(explicacao);
         explicacao.setAluno(this);
     }
-**/
+
 }

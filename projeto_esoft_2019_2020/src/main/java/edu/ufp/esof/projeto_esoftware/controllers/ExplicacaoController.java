@@ -1,7 +1,7 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
-import edu.ufp.esof.projeto_esoftware.models.Aluno;
-import edu.ufp.esof.projeto_esoftware.services.AlunoService;
+import edu.ufp.esof.projeto_esoftware.models.Explicacao;
+import edu.ufp.esof.projeto_esoftware.services.ExplicacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/aluno")
-public class AlunoController {
+@RequestMapping("/explicacao")
+public class ExplicacaoController {
     @Autowired
-    private AlunoService alunoService;
+    private ExplicacaoService explicacaoService;
 
     @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<Aluno>> getAllAlunos(){
-        Iterable<Aluno> a = alunoService.getAllAlunos();
-        return ResponseEntity.ok(a);
+    public ResponseEntity<Iterable<Explicacao>> getAllExplicacoes(){
+        Iterable<Explicacao> e = explicacaoService.getAllExplicacoes();
+        return ResponseEntity.ok(e);
     }
 }

@@ -1,23 +1,30 @@
 package edu.ufp.esof.projeto_esoftware.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Faculdade {/*
+@Entity
+public class Faculdade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Set<Curso> cursos = new HashSet<>();
 
     public void addCurso(Curso curso){
-        this.getCursos().add(curso);
+        this.cursos.add(curso);
         curso.setFaculdade(this);
-    }*/
+    }
 }

@@ -10,9 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Cadeira {/*
+@Entity
+public class Cadeira {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
@@ -21,18 +25,24 @@ public class Cadeira {/*
     private Curso curso;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Set<Explicacao> explicacoes = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Set<Explicador> explicadores = new HashSet<>();
 
     public void addExplicador(Explicador explicador){
-        this.getExplicadores().add(explicador);
+        this.explicadores.add(explicador);
         explicador.getCadeiras().add(this);
     }
 
     public void addExplicacao(Explicacao explicacao){
-        this.getExplicacoes().add(explicacao);
+        this.explicacoes.add(explicacao);
         explicacao.setCadeira(this);
-    }*/
+    }
 }
