@@ -13,4 +13,8 @@ public class CadeiraService {
     public Iterable<Cadeira> getAllCadeiras(){
         return cadeiraRepo.findAll();
     }
+
+    public Cadeira createCadeira(Cadeira cadeira) {
+        return cadeiraRepo.save(cadeira);
+    }
 }

@@ -29,4 +29,15 @@ public class Aluno {
         explicacao.setAluno(this);
     }
 
+
+    /*Todo*/
+    /**Verificar se funciona como quero*/
+    public boolean sameName(String n){
+        if(this.nome.equals(n)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

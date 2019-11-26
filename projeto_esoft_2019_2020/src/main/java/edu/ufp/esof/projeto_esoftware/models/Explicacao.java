@@ -36,4 +36,5 @@ public class Explicacao {
     @JsonIgnore
     private Cadeira cadeira;
 
+
 }
