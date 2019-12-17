@@ -29,4 +29,10 @@ public class CursoController {
         Curso c = cursoService.createCurso(curso);
         return ResponseEntity.ok(c);
     }
+
+    @RequestMapping(value="",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Curso> updateCurso(@RequestBody Curso c){
+        cursoService.updateCurso(c);
+        return ResponseEntity.ok(c);
+    }
 }

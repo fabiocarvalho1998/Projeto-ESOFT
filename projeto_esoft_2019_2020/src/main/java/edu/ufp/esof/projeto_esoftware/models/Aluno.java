@@ -29,6 +29,10 @@ public class Aluno {
         explicacao.setAluno(this);
     }
 
+    public void removeExplicacao(Explicacao exp){
+        this.explicacoes.remove(exp);
+    }
+
 
     /*Todo*/
     /**Verificar se funciona como quero*/

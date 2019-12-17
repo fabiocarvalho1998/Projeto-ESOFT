@@ -3,6 +3,7 @@ package edu.ufp.esof.projeto_esoftware.controllers;
 
 import edu.ufp.esof.projeto_esoftware.models.Aluno;
 import edu.ufp.esof.projeto_esoftware.models.Disponibilidade;
+import edu.ufp.esof.projeto_esoftware.models.Idioma;
 import edu.ufp.esof.projeto_esoftware.services.DisponibilidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,5 +29,11 @@ public class DisponibilidadesController {
     public ResponseEntity<Disponibilidade> createDisponibilidade(@RequestBody Disponibilidade d){
         Disponibilidade dis = disponibilidadeService.createDisponibilidade(d);
         return ResponseEntity.ok(dis);
+    }
+
+    @RequestMapping(value="",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Disponibilidade> updateDisponibilidade(@RequestBody Disponibilidade d){
+        disponibilidadeService.updateDisponibilidade(d);
+        return ResponseEntity.ok(d);
     }
 }

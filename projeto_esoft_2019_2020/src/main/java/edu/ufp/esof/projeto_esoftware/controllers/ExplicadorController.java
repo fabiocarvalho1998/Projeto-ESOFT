@@ -1,14 +1,13 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
+import edu.ufp.esof.projeto_esoftware.models.Aluno;
+import edu.ufp.esof.projeto_esoftware.models.Explicacao;
 import edu.ufp.esof.projeto_esoftware.models.Explicador;
 import edu.ufp.esof.projeto_esoftware.services.ExplicadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/explicador")
@@ -26,5 +25,11 @@ public class ExplicadorController {
     public ResponseEntity<Explicador> createExplicador(@RequestBody Explicador explicador){
         Explicador e = explicadorService.createExplicador(explicador);
         return ResponseEntity.ok(e);
+    }
+
+    @RequestMapping(value="",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Explicador> updateExplicador(@RequestBody Explicador ex){
+        explicadorService.updateExplicador(ex);
+        return ResponseEntity.ok(ex);
     }
 }

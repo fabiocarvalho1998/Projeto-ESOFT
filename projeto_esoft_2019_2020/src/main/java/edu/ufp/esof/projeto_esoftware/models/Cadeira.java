@@ -36,13 +36,24 @@ public class Cadeira {
     @JsonIgnore
     private Set<Explicador> explicadores = new HashSet<>();
 
+
     public void addExplicador(Explicador explicador){
         this.explicadores.add(explicador);
         explicador.getCadeiras().add(this);
+    }
+
+    public void removeExplicador(Explicador e){
+        this.explicadores.remove(e);
     }
 
     public void addExplicacao(Explicacao explicacao){
         this.explicacoes.add(explicacao);
         explicacao.setCadeira(this);
     }
+
+    public void removeExplicacao(Explicacao e){
+        this.explicacoes.remove(e);
+    }
+
+
 }

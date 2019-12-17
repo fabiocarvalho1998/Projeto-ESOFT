@@ -6,6 +6,8 @@ import edu.ufp.esof.projeto_esoftware.repositories.IdiomaRepoI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class IdiomaService {
     @Autowired
@@ -17,5 +19,13 @@ public class IdiomaService {
 
     public Idioma createIdioma(Idioma idioma) {
         return idiomaRepo.save(idioma);
+    }
+
+    public Optional<Idioma> updateIdioma(Idioma i){
+        Optional<Idioma> idi = idiomaRepo.findById(i.getId());
+        if (!idi.isPresent())return idi;
+        idi.get().setIdioma(i.getIdioma());
+        idiomaRepo.save(idi.get());
+        return idi;
     }
 }

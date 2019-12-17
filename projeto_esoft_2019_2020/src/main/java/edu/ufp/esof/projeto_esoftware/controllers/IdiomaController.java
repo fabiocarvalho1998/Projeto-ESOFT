@@ -29,4 +29,10 @@ public class IdiomaController {
         Idioma i = idiomaService.createIdioma(idioma);
         return ResponseEntity.ok(i);
     }
+
+    @RequestMapping(value="",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Idioma> updateIdiona(@RequestBody Idioma i){
+        idiomaService.updateIdioma(i);
+        return ResponseEntity.ok(i);
+    }
 }

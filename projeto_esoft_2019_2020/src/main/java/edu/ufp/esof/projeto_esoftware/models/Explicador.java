@@ -51,9 +51,17 @@ public class Explicador {
         explicacao.setExplicador(this);
     }
 
+    public void removeExplicacao(Explicacao exp){
+        this.explicacoes.remove(exp);
+    }
+
     public void addCadeira(Cadeira cadeira) {
         cadeiras.add(cadeira);
         cadeira.getExplicadores().add(this);
+    }
+
+    public void removeCadeira(Cadeira c){
+        this.cadeiras.remove(c);
     }
 
     public void addDisponibilidade(Disponibilidade disponibilidade) {

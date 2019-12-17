@@ -1,5 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
+import edu.ufp.esof.projeto_esoftware.models.Cadeira;
 import edu.ufp.esof.projeto_esoftware.models.Faculdade;
 import edu.ufp.esof.projeto_esoftware.services.FaculdadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class FaculdadeController {
     @RequestMapping(value="",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Faculdade> createExplicador(@RequestBody Faculdade faculdade){
         Faculdade f = faculdadeService.createFaculdade(faculdade);
+        return ResponseEntity.ok(f);
+    }
+
+    @RequestMapping(value="",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Faculdade> updateFaculdade(@RequestBody Faculdade f){
+        faculdadeService.updateFaculdade(f);
         return ResponseEntity.ok(f);
     }
 }

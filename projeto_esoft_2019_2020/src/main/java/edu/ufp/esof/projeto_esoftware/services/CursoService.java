@@ -6,6 +6,8 @@ import edu.ufp.esof.projeto_esoftware.repositories.CursoRepoI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CursoService {
     @Autowired
@@ -17,5 +19,13 @@ public class CursoService {
 
     public Curso createCurso(Curso curso) {
         return cursoRepo.save(curso);
+    }
+
+    public Optional<Curso> updateCurso(Curso c){
+        Optional<Curso> cr = cursoRepo.findById(c.getId());
+        if (!cr.isPresent())return cr;
+        cr.get().setNome(c.getNome());
+        cursoRepo.save(cr.get());
+        return cr;
     }
 }
