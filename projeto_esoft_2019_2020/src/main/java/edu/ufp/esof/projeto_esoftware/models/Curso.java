@@ -12,9 +12,12 @@ import java.util.Set;
 @Data
 @Entity
 public class Curso {
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+=======
+>>>>>>> Stashed changes
     private String nome;
 
 

@@ -29,6 +29,7 @@ public class Aluno {
         explicacao.setAluno(this);
     }
 
+<<<<<<< Updated upstream
     public void removeExplicacao(Explicacao exp){
         this.explicacoes.remove(exp);
     }
@@ -44,4 +45,6 @@ public class Aluno {
         }
     }
 
+=======
+>>>>>>> Stashed changes
 }

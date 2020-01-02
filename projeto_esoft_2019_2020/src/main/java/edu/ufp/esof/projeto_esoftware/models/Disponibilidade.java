@@ -12,6 +12,7 @@ import java.time.LocalTime;
 @Data
 @Entity
 public class Disponibilidade {
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +26,9 @@ public class Disponibilidade {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
+=======
+    @ManyToOne(fetch = FetchType.LAZY)
+>>>>>>> Stashed changes
     private Explicador explicador;
 }
 

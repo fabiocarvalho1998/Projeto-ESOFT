@@ -12,11 +12,14 @@ import java.util.Set;
 @Data
 @Entity
 public class Idioma {
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String idioma;
 
+=======
+>>>>>>> Stashed changes
     @ManyToMany(fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

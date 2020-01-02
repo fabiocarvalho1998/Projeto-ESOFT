@@ -12,9 +12,12 @@ import java.util.Set;
 @Data
 @Entity
 public class Cadeira {
+<<<<<<< Updated upstream
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+=======
+>>>>>>> Stashed changes
     private String nome;
 
 
@@ -50,10 +53,13 @@ public class Cadeira {
         this.explicacoes.add(explicacao);
         explicacao.setCadeira(this);
     }
+<<<<<<< Updated upstream
 
     public void removeExplicacao(Explicacao e){
         this.explicacoes.remove(e);
     }
 
 
+=======
+>>>>>>> Stashed changes
 }

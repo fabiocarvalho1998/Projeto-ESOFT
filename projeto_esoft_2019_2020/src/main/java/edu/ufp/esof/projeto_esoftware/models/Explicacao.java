@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class Explicacao {
+<<<<<<< Updated upstream
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,9 @@ public class Explicacao {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
+=======
+    @ManyToOne(fetch = FetchType.LAZY)
+>>>>>>> Stashed changes
     private Explicador explicador;
 
     @ManyToOne(fetch = FetchType.EAGER)
