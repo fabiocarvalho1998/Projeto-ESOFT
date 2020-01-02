@@ -15,7 +15,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-/**
+
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "Aluno")
@@ -25,5 +25,5 @@ public class Aluno {
         this.getExplicacoes().add(explicacao);
         explicacao.setAluno(this);
     }
-**/
+
 }

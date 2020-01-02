@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Explicador {/*
+@Entity
+public class Explicador {
     private String nome;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -45,5 +45,5 @@ public class Explicador {/*
         this.getIdiomas().add(idioma);
         idioma.getExplicadores().add(this);
     }
-*/
+
 }

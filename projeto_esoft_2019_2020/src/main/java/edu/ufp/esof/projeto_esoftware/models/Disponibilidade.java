@@ -10,8 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Data
-//@Entity
-public class Disponibilidade {/*
+@Entity
+public class Disponibilidade {
     @ManyToOne(fetch = FetchType.LAZY)
-    private Explicador explicador;*/
+    private Explicador explicador;
 }

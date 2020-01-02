@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Faculdade {/*
+@Entity
+public class Faculdade {
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -19,5 +19,5 @@ public class Faculdade {/*
     public void addCurso(Curso curso){
         this.getCursos().add(curso);
         curso.setFaculdade(this);
-    }*/
+    }
 }

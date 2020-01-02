@@ -10,13 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Idioma {/**
+@Entity
+public class Idioma {
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Explicador> explicadores = new HashSet<>();
 
     public void addExplicador(Explicador explicador) {
         this.getExplicadores().add(explicador);
         explicador.getIdiomas().add(this);
-    }**/
+    }
 }

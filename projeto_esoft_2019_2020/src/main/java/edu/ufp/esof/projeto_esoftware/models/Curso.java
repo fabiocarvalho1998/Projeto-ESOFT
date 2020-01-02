@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Curso {/*
+@Entity
+public class Curso {
     private String nome;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -27,5 +27,5 @@ public class Curso {/*
     public void addCadeira(Cadeira cadeira){
         this.getCadeiras().add(cadeira);
         cadeira.setCurso(this);
-    }*/
+    }
 }

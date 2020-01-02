@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-//@Entity
-public class Cadeira {/*
+@Entity
+public class Cadeira {
     private String nome;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,5 +34,5 @@ public class Cadeira {/*
     public void addExplicacao(Explicacao explicacao){
         this.getExplicacoes().add(explicacao);
         explicacao.setCadeira(this);
-    }*/
+    }
 }
