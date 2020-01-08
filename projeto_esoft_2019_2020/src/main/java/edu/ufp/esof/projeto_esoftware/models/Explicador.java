@@ -1,11 +1,15 @@
 package edu.ufp.esof.projeto_esoftware.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,16 +22,16 @@ public class Explicador {
     private String nome;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "explicadores")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
+    //@JsonIgnore
     private Set<Idioma> idiomas = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "explicador")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
+    //@JsonIgnore
     private Set<Disponibilidade> disponibilidades = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -39,17 +43,37 @@ public class Explicador {
     @ManyToMany(cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
+    //@JsonIgnore
     private Set<Cadeira> cadeiras = new HashSet<>();
 
 
 
-
-
-    public void addExplicacao(Explicacao explicacao) {
-        this.explicacoes.add(explicacao);
-        explicacao.setExplicador(this);
+    @JsonInclude
+    @ToString.Include
+    public Set<String> cadeiras() {
+        Set<String> names=new HashSet<>();
+        for(Cadeira cadeira :this.cadeiras){
+            names.add(cadeira.getNome());
+        }
+        return names;
     }
+
+
+    public void update(Explicador explicador) {
+        this.setExplicacoes(explicador.getExplicacoes());
+        this.setCadeiras(explicador.getCadeiras());
+    }
+
+
+    public void addExplicacao(Explicacao e){
+        this.explicacoes.add(e);
+        e.setExplicador(this);
+        Aluno aluno = e.getAluno();
+        if(aluno !=null && !aluno.getExplicacoes().contains(e)){
+            aluno.addExplicacao(e);
+        }
+    }
+
 
     public void removeExplicacao(Explicacao exp){
         this.explicacoes.remove(exp);
@@ -74,4 +98,24 @@ public class Explicador {
         idioma.getExplicadores().add(this);
     }
 
+
+
+    public boolean temhorario(Integer diasem, LocalTime horaInicio){
+        for(Disponibilidade d: disponibilidades){
+            if(d.getDiaSemana().getValue()==diasem){
+                if(horaInicio.isAfter(d.getHoraInicio())&&horaInicio.isBefore(d.getHoraFim()))return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean temExplicacao(Explicacao e){
+        LocalDateTime hfim = e.getDataInicio().plusMinutes(30);
+        for(Explicacao e1: explicacoes){
+            if(e1.overlaps(e))return true; //já tem uma consulta marcada
+        }
+        return false; // nao tem nenhuma consulta marcada nessa hora
+    }
+
 }
+

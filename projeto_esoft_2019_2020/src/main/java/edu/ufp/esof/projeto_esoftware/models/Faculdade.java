@@ -1,6 +1,7 @@
 package edu.ufp.esof.projeto_esoftware.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -20,7 +21,8 @@ public class Faculdade {
     @OneToMany(cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value = "faculdadeCursos")
     private Set<Curso> cursos = new HashSet<>();
 
     public void addCurso(Curso curso){

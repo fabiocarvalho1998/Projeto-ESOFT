@@ -18,23 +18,35 @@ public class Explicacao {
 
     private LocalDateTime dataInicio;
 
+    private LocalDateTime dataFim;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
     private Explicador explicador;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
     private Aluno aluno;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
     private Cadeira cadeira;
 
 
+    public boolean overlaps(Explicacao e) {
+        return this.isBetween(e) || e.isBetween(this) ||
+                (this.dataInicio.equals(e.dataInicio) && this.dataFim.equals(e.dataFim));
+    }
+
+    private boolean isBetween(Explicacao e){
+        LocalDateTime explicacaoStartTime=e.getDataInicio();
+        LocalDateTime explicacaoEndTime=e.getDataFim();
+        return this.isBetween(explicacaoStartTime) || this.isBetween(explicacaoEndTime);
+    }
+    private boolean isBetween(LocalDateTime timeToCheck){
+        return this.dataInicio.isBefore(timeToCheck) && this.dataFim.isAfter(timeToCheck);
+    }
 }

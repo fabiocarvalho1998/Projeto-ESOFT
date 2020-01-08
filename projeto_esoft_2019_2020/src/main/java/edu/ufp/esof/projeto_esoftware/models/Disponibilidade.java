@@ -26,5 +26,22 @@ public class Disponibilidade {
     @ToString.Exclude
     @JsonIgnore
     private Explicador explicador;
+
+
+    public boolean contains(Explicacao e){
+        DayOfWeek dayOfWeek= e.getDataInicio().getDayOfWeek();
+        if(dayOfWeek.equals(this.diaSemana)){
+            LocalTime appointmentStart= e.getDataInicio().toLocalTime();
+            LocalTime appointmentEnd= e.getDataFim().toLocalTime();
+            return this.contains(appointmentStart,appointmentEnd);
+        }
+        return false;
+    }
+
+    private boolean contains(LocalTime start, LocalTime end){
+        return (this.horaInicio.isBefore(start) || this.horaInicio.equals(start))
+                &&
+                (this.horaFim.isAfter(end) || this.horaFim.equals(end)) ;
+    }
 }
 

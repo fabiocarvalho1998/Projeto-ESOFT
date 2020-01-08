@@ -16,6 +16,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String nome;
 
     @EqualsAndHashCode.Exclude
@@ -24,24 +25,15 @@ public class Aluno {
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "aluno")
     private Set<Explicacao> explicacoes=new HashSet<>();
 
-    public void addExplicacao(Explicacao explicacao) {
-        this.explicacoes.add(explicacao);
-        explicacao.setAluno(this);
+
+    public void addExplicacao(Explicacao e){
+        this.explicacoes.add(e);
+        e.setAluno(this);
     }
 
     public void removeExplicacao(Explicacao exp){
         this.explicacoes.remove(exp);
     }
 
-
-    /*Todo*/
-    /**Verificar se funciona como quero*/
-    public boolean sameName(String n){
-        if(this.nome.equals(n)){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
 }
