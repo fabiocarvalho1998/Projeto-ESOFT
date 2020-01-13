@@ -1,5 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.UniversidadeAPI;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -45,6 +46,12 @@ public class Explicador {
     @ToString.Exclude
     //@JsonIgnore
     private Set<Cadeira> cadeiras = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference(value = "universidadeExplicadores")
+    private Universidade universidade;
 
 
 
@@ -116,6 +123,14 @@ public class Explicador {
         }
         return false; // nao tem nenhuma consulta marcada nessa hora
     }
+
+
+    @JsonInclude
+    //@JsonProperty(value = "universidade")
+    public String getUniversidadeNome(){
+        return this.universidade==null?"null":this.universidade.getNome();
+    }
+
 
 
     public static ExplicadorBuilder builder() {

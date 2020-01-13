@@ -30,4 +30,11 @@ public class ExplicadorController {
         return ResponseEntity.ok(e.get());
     }
 
+    @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Iterable<Explicador>> getAllExplicadores(){
+        this.logger.info("Pedido GET Recebido!");
+        Iterable<Explicador> e = explicadorService.getAllExplicadores();
+        return ResponseEntity.ok(e);
+    }
+
 }

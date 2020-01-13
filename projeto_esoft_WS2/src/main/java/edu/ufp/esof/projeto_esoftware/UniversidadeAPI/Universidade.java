@@ -1,16 +1,17 @@
 package edu.ufp.esof.projeto_esoftware.UniversidadeAPI;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Entity
 @Data
 public class Universidade {
     @Id
@@ -19,15 +20,23 @@ public class Universidade {
     private String nome;
     private String ip;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Set<Faculdade> faculdades = new HashSet<>();
-    @OneToMany
-    private Set<Faculdade> explicadores = new HashSet<>();
-    private LocalDateTime updatedon;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonManagedReference(value = "universidadeExplicadores")
+    private Set<Explicador> explicadores = new HashSet<>();
+
 
 
     public void addExplicador(Explicador e){
-        this.addExplicador(e);
+        this.explicadores.add(e);
+
     }
 
     public boolean temFaculdade(String faculdade) {
@@ -36,10 +45,6 @@ public class Universidade {
                 return true;
         }
         return false;
-    }
-
-    public boolean isValid() {
-        return updatedon.plusDays(1).isAfter(LocalDateTime.now());
     }
 
 
