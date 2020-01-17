@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -28,40 +29,10 @@ public class ExplicadorController {
     private ExplicadorService explicadorService;
 
     @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getExplicadores(@RequestParam("cadeira") Optional<Long> idCadeira,
-                                          @RequestParam("dia") Optional<DayOfWeek> dia,
-                                          @RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) Optional<LocalTime> horaInicio,
-                                          @RequestParam("fim") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) Optional<LocalTime> horaFim){
-
-        int params=0;
-        if (idCadeira.isPresent())
-            params++;
-        if (dia.isPresent())
-            params++;
-        if (horaInicio.isPresent())
-            params++;
-        if (horaFim.isPresent())
-            params++;
-
-        if (params==0)
-            return getAllExplicadores();
-        else if(params!=4)
-            return ResponseEntity.badRequest().body("{\"error\":\"All 4 parameters must be specified\"}");
-        else {
-            return getExplicadoresDisponiveisCadeiraData(idCadeira.get(), dia.get().getValue(), horaInicio.get(), horaFim.get());
-        }
-    }
-
-    public ResponseEntity<Iterable<Explicador>> getExplicadoresDisponiveisCadeiraData(
-            @PathVariable("id_cadeira")Long idCadeira, @PathVariable("dia")int dia,
-            @PathVariable("hora_inicio")LocalTime horaInicio,
-            @PathVariable("hora_fim")LocalTime horaFim){
-
+    public ResponseEntity getExplicadores(@RequestParam Map<String,String> query){
         this.logger.info("Pedido GET Recebido!");
-        Iterable<Explicador> e = explicadorService.getExplicadoresDisponiveisCadeiraData(idCadeira,DayOfWeek.of(dia),horaInicio,horaFim);
-        return ResponseEntity.ok(e);
+        return ResponseEntity.ok(explicadorService.listaExplicadores(query));
     }
-
 
     public ResponseEntity<Iterable<Explicador>> getAllExplicadores(){
         this.logger.info("Pedido GET Recebido!");

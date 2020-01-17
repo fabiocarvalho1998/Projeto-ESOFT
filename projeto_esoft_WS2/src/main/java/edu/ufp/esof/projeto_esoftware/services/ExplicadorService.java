@@ -25,18 +25,6 @@ public class ExplicadorService {
     private ExplicadorRepoI explicadorRepo;
 
 
-    public Optional<Explicador> createExplicador(Explicador exp, Long idUni) {
-        Optional<Universidade> optionalUni=this.uniRepo.findById(idUni);
-        if(optionalUni.isPresent()){
-            Universidade u=optionalUni.get();
-            u.addExplicador(exp);
-            exp.setUniversidade(u);
-            this.uniRepo.save(u);
-            return Optional.of(exp);
-        }
-        return Optional.empty();
-    }
-
     public Iterable<Explicador> getAllExplicadores(){
         return explicadorRepo.findAll();
     }

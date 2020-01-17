@@ -24,12 +24,12 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        Universidade u1=new Universidade.UniversidadeBuilder().nome("Universidade Fernando Pessoa").ip("http://localhost:9000/").build();
-        Explicador e1=new Explicador.ExplicadorBuilder().nome("José").build();
-        e1.setUniversidade(u1);
-        u1.addExplicador(e1);
-
+        Universidade u1=new Universidade.UniversidadeBuilder().nome("Universidade Fernando Pessoa").ip("http://localhost:8080/").build();
+        Universidade u2=new Universidade.UniversidadeBuilder().nome("FEUP").ip("http://localhost:8081/").build();
+        Universidade u3=new Universidade.UniversidadeBuilder().nome("ISEP").ip("http://localhost:8082/").build();
         urepo.save(u1);
+        urepo.save(u2);
+        urepo.save(u3);
     }
 }
 

@@ -1,5 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.UniversidadeAPI;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -24,6 +25,14 @@ public class Faculdade {
     //@JsonIgnore
     @JsonManagedReference(value = "faculdadeCursos")
     private Set<Curso> cursos = new HashSet<>();
+
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference(value="universidadeFaculdades")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Universidade universidade;
+
 
     public void addCurso(Curso curso){
         this.cursos.add(curso);

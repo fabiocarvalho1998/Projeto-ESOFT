@@ -1,6 +1,8 @@
 package edu.ufp.esof.projeto_esoftware.UniversidadeAPI;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,6 +29,13 @@ public class Disponibilidade {
     @JsonIgnore
     private Explicador explicador;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    //@JsonBackReference(value = "universidadeDisponibilidades")
+
+    private Universidade universidade;
+
 
     public boolean contains(Explicacao e){
         DayOfWeek dayOfWeek= e.getDataInicio().getDayOfWeek();
@@ -43,6 +52,15 @@ public class Disponibilidade {
                 &&
                 (this.horaFim.isBefore(end) || this.horaFim.equals(end)) ;
     }
+
+
+
+    @JsonInclude
+    //@JsonProperty(value = "universidade")
+    public String getUniversidadeNome(){
+        return this.universidade==null?"null":this.universidade.getNome();
+    }
+
 
 
     public static DisponibilidadeBuilder builder() {

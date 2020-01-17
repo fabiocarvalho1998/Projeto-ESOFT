@@ -1,6 +1,8 @@
 package edu.ufp.esof.projeto_esoftware.UniversidadeAPI;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -37,6 +39,12 @@ public class Explicacao {
     @ToString.Exclude
     private Cadeira cadeira;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference(value = "universidadeExplicacoes")
+    private Universidade universidade;
+
 
     public boolean overlaps(Explicacao e) {
         return this.isBetween(e) || e.isBetween(this) ||
@@ -50,6 +58,14 @@ public class Explicacao {
     }
     private boolean isBetween(LocalDateTime timeToCheck){
         return this.dataInicio.isBefore(timeToCheck) && this.dataFim.isAfter(timeToCheck);
+    }
+
+
+
+    @JsonInclude
+    //@JsonProperty(value = "universidade")
+    public String getUniversidadeNome(){
+        return this.universidade==null?"null":this.universidade.getNome();
     }
 
 

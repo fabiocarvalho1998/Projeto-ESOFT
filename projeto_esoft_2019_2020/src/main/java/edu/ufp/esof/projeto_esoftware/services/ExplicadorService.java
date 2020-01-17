@@ -10,11 +10,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ExplicadorService {
     @Autowired
     private ExplicadorRepoI explicadorRepo;
@@ -48,7 +53,29 @@ public class ExplicadorService {
     }
 
     public Iterable<Explicador> getExplicadoresDisponiveisCadeiraData(Long idCadeira, DayOfWeek dia, LocalTime horaInicio, LocalTime horaFim){
-        return explicadorRepo.getExplicadoresDisponiveisCadeiraData(idCadeira, dia, horaInicio, horaFim);
+        Optional<Cadeira> optCadeira=this.cadeiraRepo.findById(idCadeira);
+        Optional<DayOfWeek> optDia=Optional.of(dia);
+        Optional<LocalTime> optInicio=Optional.of(horaInicio);
+        Optional<LocalTime> optFim=Optional.of(horaFim);
+        int params=0;
+        if (optCadeira.isPresent())
+            params++;
+        if (optDia.isPresent())
+            params++;
+        if (optInicio.isPresent())
+            params++;
+        if (optFim.isPresent())
+            params++;
+
+        if (params==0)
+            return getAllExplicadores();
+        else if(params!=4)
+            return null;
+            //return ResponseEntity.badRequest().body("{\"error\":\"All 4 parameters must be specified\"}");
+        else {
+            return explicadorRepo.getExplicadoresDisponiveisCadeiraData(idCadeira, dia, horaInicio, horaFim);
+            //return getExplicadoresDisponiveisCadeiraData(idCadeira, dia, horaInicio, horaFim);
+        }
     }
 
     public Optional<Explicador> updateExplicadorComCadeira(Explicador explicador, Long idCadeira) {
@@ -66,5 +93,14 @@ public class ExplicadorService {
 
     public Optional<Explicador> getExplicadorByNome(String nome) {
         return explicadorRepo.findByNome(nome);
+    }
+
+    public Iterable<Explicador> listaExplicadores(Map<String,String> query) {
+        if(query.keySet().isEmpty()){
+            return this.explicadorRepo.findAll();
+        }else{
+            return this.getExplicadoresDisponiveisCadeiraData(Long.parseLong(query.get("cadeira")),DayOfWeek.valueOf(query.get("dia")),
+                    LocalTime.parse(query.get("inicio")),LocalTime.parse(query.get("fim")));
+        }
     }
 }

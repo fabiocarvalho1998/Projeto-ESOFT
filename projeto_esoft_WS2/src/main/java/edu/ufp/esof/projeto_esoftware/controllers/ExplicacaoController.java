@@ -1,5 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
+import edu.ufp.esof.projeto_esoftware.UniversidadeAPI.Explicacao;
 import edu.ufp.esof.projeto_esoftware.UniversidadeAPI.Explicador;
 import edu.ufp.esof.projeto_esoftware.UniversidadeAPI.Universidade;
 import edu.ufp.esof.projeto_esoftware.services.ExplicadorService;
@@ -14,50 +15,40 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/explicador")
-public class ExplicadorController {
-    @Autowired
-    private final ExplicadorService explicadorService;
+@RequestMapping("/explicacao")
+public class ExplicacaoController {
+
 
     @Autowired
     private UniversidadeService universidadeService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ExplicadorController(ExplicadorService explicadorService) {
-        this.explicadorService = explicadorService;
-    }
 
     @RequestMapping(value="/{id_universidade}",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Explicador> createExplicador(@RequestBody Explicador ex, @PathVariable("id_universidade")Long idUniversidade){
+    public ResponseEntity<Explicacao> createExplicacao(@RequestBody Explicacao ex, @PathVariable("id_universidade")Long idUniversidade){
 
         Optional<Universidade> optionalUniversidade=universidadeService.getUniversidadeById(idUniversidade);
         if(optionalUniversidade.isPresent()) {
             Universidade universidade=optionalUniversidade.get();
-            String path = universidade.getIp().concat("explicador");
+            String path = universidade.getIp().concat("explicacao");
             HttpHeaders headers = new HttpHeaders();
-            HttpEntity<Explicador> body = new HttpEntity<>(ex, headers);
-            ResponseEntity<Explicador> responseEntity = makeRequest(path, HttpMethod.POST, body, Explicador.class);
+            HttpEntity<Explicacao> body = new HttpEntity<>(ex, headers);
+            ResponseEntity<Explicacao> responseEntity = makeRequest(path, HttpMethod.POST, body, Explicacao.class);
             this.logger.info("Pedido POST Enviado!");
             if (responseEntity.getStatusCodeValue() == 200) {
-                Explicador explicadorFromWS1 = responseEntity.getBody();
-                if(explicadorFromWS1!=null) {
-                    explicadorFromWS1.setUniversidade(universidade);
-                    return ResponseEntity.ok(explicadorFromWS1);
+                Explicacao explicacaoFromWS1 = responseEntity.getBody();
+                if(explicacaoFromWS1!=null) {
+                    explicacaoFromWS1.setUniversidade(universidade);
+                    return ResponseEntity.ok(explicacaoFromWS1);
                 }
             }
         }
 
-            return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().build();
 
     }
 
-    @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<Explicador>> getAllExplicadores(){
-        this.logger.info("Pedido GET Recebido!");
-        Iterable<Explicador> e = explicadorService.getAllExplicadores();
-        return ResponseEntity.ok(e);
-    }
 
 
 
