@@ -2,7 +2,6 @@ package edu.ufp.esof.projeto_esoftware.controllers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.ufp.esof.projeto_esoftware.models.Cadeira;
 import edu.ufp.esof.projeto_esoftware.models.Explicador;
 import edu.ufp.esof.projeto_esoftware.services.ExplicadorService;
 import org.junit.jupiter.api.Test;
@@ -11,17 +10,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -68,7 +64,7 @@ public class ExplicadorControllerTest {
     }
 
     @Test
-    public void createExplicador() throws Exception {
+    void createExplicador() throws Exception {
 
         Explicador e = new Explicador.ExplicadorBuilder().nome("Alessandro Moreira").build();
         given(explicadorService.createExplicador(e)).willReturn(e);

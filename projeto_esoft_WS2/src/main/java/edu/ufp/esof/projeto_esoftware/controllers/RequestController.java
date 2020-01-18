@@ -11,7 +11,6 @@ public class RequestController {
     @GetMapping(value = "/teste", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Iterable getAll() {
-        //todo qual é o path?
         String path = "http://localhost:8080/";
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> nullBodyRequest = new HttpEntity<>(null, headers);
