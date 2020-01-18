@@ -45,9 +45,18 @@ public class ExplicadorService {
         Optional<Explicador> exp = explicadorRepo.findById(e.getId());
         if (!exp.isPresent())return exp;
         exp.get().setNome(e.getNome());
-       //exp.get().setIdiomas(e.getIdiomas());
-        //exp.get().setDisponibilidades(e.getDisponibilidades());
-        //exp.get().setCadeiras(e.getCadeiras());
+        /*exp.get().setIdiomas(e.getIdiomas());
+        for(Idioma i: e.getIdiomas()){
+            i.addExplicador(e);
+        }*/
+        exp.get().setDisponibilidades(e.getDisponibilidades());
+        for(Disponibilidade d: e.getDisponibilidades()){
+            d.setExplicador(e);
+        }/*
+        exp.get().setCadeiras(e.getCadeiras());
+        for(Cadeira c: e.getCadeiras()){
+            c.addExplicador(e);
+        }*/
         explicadorRepo.save(exp.get());
         return exp;
     }

@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,4 +31,5 @@ public class ExplicadorService {
     public Iterable<Explicador> getAllExplicadores(){
         return explicadorRepo.findAll();
     }
+
 }
