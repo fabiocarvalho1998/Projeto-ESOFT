@@ -32,4 +32,8 @@ public class ExplicadorService {
         return explicadorRepo.findAll();
     }
 
+
+    public void saveRepoExplicador(Explicador e){
+        this.explicadorRepo.save(e);
+    }
 }

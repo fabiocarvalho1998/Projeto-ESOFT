@@ -11,6 +11,8 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -111,10 +113,28 @@ public class ExplicadorController {
     }
 
 
-    @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getExplicadores(@RequestParam Map<String,String> query){
-        this.logger.info("Pedido GET Recebido!");
-        return ResponseEntity.ok(explicadorService.listaExplicadores(query));
+    @RequestMapping(value="",method = RequestMethod.GET)
+    public ResponseEntity<Explicador> getExplicadores(@RequestParam Map<String,String> query){
+        Long idUniversidade=Long.parseLong(query.get("universidade"));
+        Long idCadeira=Long.parseLong(query.get("cadeira"));
+        DayOfWeek dia=DayOfWeek.valueOf(query.get("dia"));
+        LocalTime inicio=LocalTime.parse(query.get("inicio"));
+        LocalTime fim=LocalTime.parse(query.get("fim"));
+
+        Optional<Universidade> optionalUniversidade=universidadeService.getUniversidadeById(idUniversidade);
+        if(optionalUniversidade.isPresent()) {
+            Universidade uni = optionalUniversidade.get();
+
+            String path = uni.getIp().concat("explicador?cadeira=" + idCadeira + "&dia=" + dia + "&inicio=" + inicio + "&fim=" + fim);
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<String> nullBody = new HttpEntity<>(null, headers);
+            ResponseEntity<Explicador> responseEntity = makeRequest(path, HttpMethod.GET, nullBody, Explicador[].class);
+            this.logger.info("Pedido GET Enviado!");
+
+            return ResponseEntity.ok(responseEntity.getBody());
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 
