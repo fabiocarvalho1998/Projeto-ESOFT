@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class IdiomaTest {
+class IdiomaTest {
     @Test
-    public void addExplicadorTeste() {
+    void addExplicadorTeste() {
         Idioma i1 = new Idioma.IdiomaBuilder().idioma("Frances").build();
 
         Explicador explicador = new Explicador.ExplicadorBuilder().nome("Franklin").build();

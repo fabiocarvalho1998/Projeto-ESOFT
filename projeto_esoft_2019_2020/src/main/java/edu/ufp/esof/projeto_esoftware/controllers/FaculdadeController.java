@@ -1,6 +1,5 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
-import edu.ufp.esof.projeto_esoftware.models.Cadeira;
 import edu.ufp.esof.projeto_esoftware.models.Faculdade;
 import edu.ufp.esof.projeto_esoftware.services.FaculdadeService;
 import org.slf4j.Logger;

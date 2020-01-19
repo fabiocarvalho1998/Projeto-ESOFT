@@ -1,9 +1,7 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
 
-import edu.ufp.esof.projeto_esoftware.models.Aluno;
 import edu.ufp.esof.projeto_esoftware.models.Disponibilidade;
-import edu.ufp.esof.projeto_esoftware.models.Idioma;
 import edu.ufp.esof.projeto_esoftware.services.DisponibilidadeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

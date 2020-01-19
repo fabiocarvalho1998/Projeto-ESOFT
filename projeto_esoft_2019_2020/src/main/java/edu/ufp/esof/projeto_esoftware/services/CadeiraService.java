@@ -1,9 +1,7 @@
 package edu.ufp.esof.projeto_esoftware.services;
 
-import edu.ufp.esof.projeto_esoftware.models.Aluno;
 import edu.ufp.esof.projeto_esoftware.models.Cadeira;
 import edu.ufp.esof.projeto_esoftware.models.Curso;
-import edu.ufp.esof.projeto_esoftware.models.Explicacao;
 import edu.ufp.esof.projeto_esoftware.repositories.CadeiraRepoI;
 import edu.ufp.esof.projeto_esoftware.repositories.CursoRepoI;
 import org.springframework.beans.factory.annotation.Autowired;

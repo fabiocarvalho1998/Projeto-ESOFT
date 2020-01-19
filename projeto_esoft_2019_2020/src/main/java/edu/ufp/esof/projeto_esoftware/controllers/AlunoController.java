@@ -1,7 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
 import edu.ufp.esof.projeto_esoftware.models.Aluno;
-import edu.ufp.esof.projeto_esoftware.models.Explicador;
 import edu.ufp.esof.projeto_esoftware.services.AlunoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 
 @RestController

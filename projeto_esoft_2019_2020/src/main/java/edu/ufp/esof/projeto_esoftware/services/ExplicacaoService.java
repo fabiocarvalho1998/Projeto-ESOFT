@@ -1,8 +1,6 @@
 package edu.ufp.esof.projeto_esoftware.services;
 
-import edu.ufp.esof.projeto_esoftware.models.Aluno;
 import edu.ufp.esof.projeto_esoftware.models.Explicacao;
-import edu.ufp.esof.projeto_esoftware.models.Explicador;
 import edu.ufp.esof.projeto_esoftware.repositories.AlunoRepoI;
 import edu.ufp.esof.projeto_esoftware.repositories.CadeiraRepoI;
 import edu.ufp.esof.projeto_esoftware.repositories.ExplicacaoRepoI;
@@ -10,8 +8,6 @@ import edu.ufp.esof.projeto_esoftware.repositories.ExplicadorRepoI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Optional;
 
 @Service

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FaculdadeTest {
+class FaculdadeTest {
     @Test
-    public void addCursoTeste() {
+    void addCursoTeste() {
         Faculdade f1 = new Faculdade.FaculdadeBuilder().nome("Faculdade de Ciencias e Tecnologias").build();
 
         Curso curso = new Curso.CursoBuilder().nome("Fisioterapia").build();

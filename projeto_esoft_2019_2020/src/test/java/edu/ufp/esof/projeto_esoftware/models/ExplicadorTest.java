@@ -1,6 +1,5 @@
 package edu.ufp.esof.projeto_esoftware.models;
 
-import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;

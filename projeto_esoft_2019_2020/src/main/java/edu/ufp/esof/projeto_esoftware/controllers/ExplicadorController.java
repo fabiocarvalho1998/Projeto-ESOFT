@@ -1,21 +1,17 @@
 package edu.ufp.esof.projeto_esoftware.controllers;
 
-import edu.ufp.esof.projeto_esoftware.models.Aluno;
-import edu.ufp.esof.projeto_esoftware.models.Cadeira;
-import edu.ufp.esof.projeto_esoftware.models.Explicacao;
+
 import edu.ufp.esof.projeto_esoftware.models.Explicador;
 import edu.ufp.esof.projeto_esoftware.services.ExplicadorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
+
 import java.util.Map;
 import java.util.Optional;
 

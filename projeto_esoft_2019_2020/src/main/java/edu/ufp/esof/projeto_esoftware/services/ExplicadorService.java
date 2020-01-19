@@ -6,15 +6,11 @@ import edu.ufp.esof.projeto_esoftware.repositories.CadeiraRepoI;
 import edu.ufp.esof.projeto_esoftware.repositories.ExplicacaoRepoI;
 import edu.ufp.esof.projeto_esoftware.repositories.ExplicadorRepoI;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -92,8 +88,6 @@ public class ExplicadorService {
         if(optionalCadeira.isPresent()){
             Cadeira c=optionalCadeira.get();
             c.addExplicador(explicador);
-            //explicador.addCadeira(c);
-            //this.cadeiraRepo.save(c);
             this.explicadorRepo.save(explicador);
             return Optional.of(explicador);
         }
